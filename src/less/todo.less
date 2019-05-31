@@ -1,3 +1,39 @@
 .todo {
-
+  width: 450px;
+  .todo-item {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    box-sizing: border-box;
+    .icon-feild-DateTime {
+      color: #8c8275;
+    }
+    .iconfont {
+      margin: 0 10px;
+    }
+    .iconzhengque-o {
+      color: #0dcb09;
+    }
+    .icon-link-delete {
+      color: red;
+      display: none;
+      cursor: pointer;
+    }
+    &:hover {
+      border-bottom: 1px solid #0dcb09;
+      .icon-link-delete {
+        display: block;
+      }
+    }
+    p {
+      margin: 0;
+    }
+    .create-content {
+      font-size: 14px
+    }
+    .create-date {
+      font-size: 12px;
+      color: #dddddd;
+    }
+  }
 }

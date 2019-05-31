@@ -1,9 +1,10 @@
 import EventEmitter from '../../base/EventEmitter'
 
 export default class Button extends EventEmitter{
-    constructor() {
+    constructor(label,config) {
         super()
         this._toggle = false;
+        this._label = label || 'button'
         this.create()
         this.mounted()
     }
@@ -12,7 +13,7 @@ export default class Button extends EventEmitter{
         this.$root = document.querySelector("body")
         this.$el = document.createElement('div')
         this.$el.classList.add('button')
-        this.$el.innerText = 'button'
+        this.$el.innerText =  this._label
     }
 
     mounted() {
@@ -37,6 +38,11 @@ export default class Button extends EventEmitter{
     set toggle(value) {
         this._toggle = value
         this.changeView()
+    }
+
+    set label(value) {
+        this._label = value
+        this.$el.innerText =  this._label
     }
 
     get toggle() {

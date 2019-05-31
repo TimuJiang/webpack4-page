@@ -38,10 +38,39 @@ export default class ToDo {
         this._data.forEach(item => {
             todoItem =  new ToDoItem(item)
             this._itemList.push(todoItem)
-            this.$el.appendChild(todoItem.$el)
+            this.$el.appendChild(todoItem.$fragment)
         })
     }
+
+    addTask(name) {
+        if(!name) console.error('添加任务名字')
+        let todoItem =  new ToDoItem({
+            name: name,
+            index: this._itemList.length + 1,
+            id: new Date().getTime()
+        })
+        this._itemList.push(todoItem)
+        todoItem.on('delete', this.onDelete.bind(this))
+        this.$el.appendChild(todoItem.$fragment)
+    }
+
+    onDelete (item) {
+        let index  = this._itemList.findIndex(c => {
+            return c.id === item.id
+        })
+        if(index < 0) return
+        this.$el.removeChild( this._itemList[index].$el)
+        this._itemList.splice(index, 1)
+        console.log(/this._itemList/, this._itemList)
+    }
+
     get data () {
-        return this._data
+        // if(this._itemList.length > 0) {
+        //     let string = JSON.stringify(this._itemList)
+        //     localStorage.setItem('myTask', string)
+        // }else{
+        //     this._itemList = JSON.parse( localStorage.getItem('myTask'))
+        // }
+        return this._itemList
     }
 }

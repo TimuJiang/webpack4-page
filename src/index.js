@@ -1,28 +1,23 @@
 
 import "./less/index.less"
-
+import Input from './package/input'
 import Button from './package/button'
-
+import ToDo from './package/to-do'
+let input = new Input()
 let button = new Button()
+let save = new Button()
+let todo = new ToDo()
 
-let button2 = new Button()
-
+input.mount('#task-input')
+button.label = '添加任务'
+save.label = '同步'
 button.on('click', function (event) {
-    console.log(this)
-    console.log(/event/, event)
-    button2.toggle = !button.toggle
+    todo.addTask(input.value)
+})
+save.on('click', function (event) {
+    console.log(todo.data)
 })
 
 
-import ToDo from './package/to-do'
 
 
-let myTodoList = [
-    {name: '任务1' , state: 0},
-    {name: '任务2' , state: 0},
-    {name: '任务3' , state: 0},
-    {name: '任务4' , state: 0},
-    {name: '任务5' , state: 0},
-    {name: '任务6' , state: 0},
-]
-let todo = new ToDo(myTodoList)
